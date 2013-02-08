@@ -1,4 +1,4 @@
-HASHTAG = \#gpn12
+HASHTAG = \@aamuuninen
 
 help:
 	@echo "make install - install python environment into .env"
@@ -6,7 +6,7 @@ help:
 	@echo "make clean   - cleanup"
 
 install: 
-	virtualenv .env
+	virtualenv --python=python2.7 .env
 	.env/bin/easy_install oauth2
 	.env/bin/easy_install python-twitter
 

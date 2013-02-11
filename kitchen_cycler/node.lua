@@ -18,7 +18,7 @@ function make_switcher(childs, interval)
     local next_switch = 0
     local child
     local function next_child()
-       print("switching child! Previous was " ..child)
+       print("switching child!")
         child = childs.next()
         next_switch = sys.now() + interval
     end

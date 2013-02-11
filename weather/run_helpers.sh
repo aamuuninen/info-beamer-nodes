@@ -8,9 +8,9 @@ do
  wget http://www.uniklinik-freiburg.de/modules/webcam/550/1.jpg -O temppic.jpg >/dev/null 2>&1
  mv temppic.jpg 1.jpg
  echo "got pic"
-# python analogclock/clock.py
+ python analogclock/clock.py
  #uncomment following line if using python2
- python analogclock/clock_python2.py
+ #python analogclock/clock_python2.py
  echo "set clock"
  sleep 30
 done

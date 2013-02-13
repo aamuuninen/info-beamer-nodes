@@ -1,4 +1,4 @@
-gl.setup(1980, 1600)
+gl.setup(1024, 768)
 
 local json = require"json"
 
@@ -103,7 +103,7 @@ function node.render()
     gl.clear(1,1,1,1)
     background:draw(0,0,WIDTH,HEIGHT)
     local clock = resource.render_child("analogclock")
-    clock:draw(1400,20,1870,490)
+    clock:draw(780,30,980,230)
 
 
     font = resource.load_font("font.ttf")
@@ -117,10 +117,10 @@ function node.render()
     lasthour_rain = current.rain["1h"]
     url = current.url
 
-    font:fbwrite(100, 200, "Wetter", 200, 1,1,1,1)
-    font:fbwrite(100,500, "Temperatur: " .. round(current_temp,2) .. " °C",100,1,1,1,1) 
-    font:fbwrite(100,700, "Luftfeuchte: " .. round(current_humid,2) .. " %",100,1,1,1,1) 
-    font:fbwrite(100,900, "Luftdruck: " .. round(current_pressure,2) .. " hPa",100,1,1,1,1) 
-    font:fbwrite(100,1100, "Niederschlag: " .. round(lasthour_rain,2) .. " mm/h",100,1,1,1,1) 
-    font:fbwrite(100,1500, "Wetterdaten via " .. url ,40,1,1,1,1) 
+    font:fbwrite(100, 100, "Wetter", 100, 1,1,1,1)
+    font:fbwrite(100,250, "Temperatur: " .. round(current_temp,2) .. " °C",50,1,1,1,1) 
+    font:fbwrite(100,350, "Luftfeuchte: " .. round(current_humid,2) .. " %",50,1,1,1,1) 
+    font:fbwrite(100,450, "Luftdruck: " .. round(current_pressure,2) .. " hPa",50,1,1,1,1) 
+    font:fbwrite(100,550, "Niederschlag: " .. round(lasthour_rain,2) .. " mm/h",50,1,1,1,1) 
+    font:fbwrite(100,700, "Wetterdaten via " .. url ,20,1,1,1,1) 
 end

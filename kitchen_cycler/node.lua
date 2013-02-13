@@ -1,4 +1,4 @@
-gl.setup(1920, 1080)
+gl.setup(1024, 768)
 
 local interval = 10
 local interrupt_flag = nil

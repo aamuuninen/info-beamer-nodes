@@ -114,6 +114,7 @@ function node.render()
     current_temp = current.main.temp - 273.15
     current_humid = current.main.humidity
     current_pressure = current.main.pressure
+    current_date = current.date
     lasthour_rain = current.rain["1h"]
     url = current.url
 
@@ -122,5 +123,6 @@ function node.render()
     font:fbwrite(100,350, "Luftfeuchte: " .. round(current_humid,2) .. " %",50,1,1,1,1) 
     font:fbwrite(100,450, "Luftdruck: " .. round(current_pressure,2) .. " hPa",50,1,1,1,1) 
     font:fbwrite(100,550, "Niederschlag: " .. round(lasthour_rain,2) .. " mm/h",50,1,1,1,1) 
-    font:fbwrite(100,700, "Wetterdaten via " .. url ,20,1,1,1,1) 
+    font:fbwrite(100,680, "Wetterdaten via " .. url ,20,1,1,1,1) 
+    font:fbwrite(100,720, "Aktualisiert um " .. current_date ,20,1,1,1,1)
 end

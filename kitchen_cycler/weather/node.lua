@@ -49,7 +49,7 @@ util.file_watch("forecast", function(content)
     end
 end)
 
-background = resource.load_image("1.jpg")
+background = resource.load_image("weather_background.jpg")
 
 local PI = 3.14159
 function calculatefbwritelookup(angleadd)

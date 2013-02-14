@@ -1,4 +1,4 @@
-local COUNTDOWN = 3
+local COUNTDOWN = 5
 
 gl.setup(1024, 768)
 
@@ -45,11 +45,11 @@ function node.render()
             next_image_time = sys.now() + COUNTDOWN
         end
         util.draw_correct(current_image, 0,0,WIDTH,HEIGHT)
-    elseif time_to_next < 1 then
+     elseif time_to_next < 1 then
         if not next_image then
             next_image = resource.load_image(pictures.next())
         end
-        local xoff = (1 - time_to_next) * WIDTH
+        --[[ local xoff = (1 - time_to_next) * WIDTH
 
         gl.pushMatrix()
             if out_effect < 1 then
@@ -86,6 +86,8 @@ function node.render()
                 )
             end
         gl.popMatrix()
+    --]]
+        util.draw_correct(current_image, 0,0,WIDTH,HEIGHT)
     else
         util.draw_correct(current_image, 0,0,WIDTH,HEIGHT)
     end

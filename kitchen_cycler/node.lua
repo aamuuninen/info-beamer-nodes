@@ -1,8 +1,21 @@
 gl.setup(1024, 768)
 
-local interval = 10
 local interrupt_flag = nil
 util.auto_loader(_G)
+
+
+local interval = 10
+-- set times in seconds for childs, default is *interval*
+local special_nodes = {}
+special_nodes['pricelist'] = 3
+special_nodes['photos'] = 20
+special_nodes['weather'] = 5
+special_nodes['main_text'] = 2
+
+-- set nodes which shoud be skiped (e.g. {'weather','clock',...})
+local skip_nodes = {'barcodebeamer'}
+
+local last_child = nil
 
 util.data_mapper{
    ["interrupt/tonode"] = function(node)
@@ -19,17 +32,33 @@ function make_switcher(childs, interval)
     local child
     local function next_child()
        print("switching child!")
+        last_child = child
         child = childs.next()
-        next_switch = sys.now() + interval
+
+        -- if the child is to be ignored, then ignore
+        for _,v in pairs(skip_nodes) do
+           if v == child then
+            -- do something
+            child = childs.next()
+            break
+          end
+        end
+
+       -- prevent double displaying of childs, fix a bug
+       while last_child == child do
+          child = childs.next()
+       end
+
+        -- check if the child has a special display time
+        if special_nodes[child] == nil then
+            next_switch = sys.now() + interval
+        else
+            next_switch = sys.now() + special_nodes[child] 
+        end;
     end
     local function draw()
         if sys.now() > next_switch then
             next_child()
-	    -- if the child is to be ignored, then ignore
-	    if child == "barcodebeamer" then
-	       print("skipping child")
-	       next_child()
-	       end
 	    print("Child name:" .. child )
 	 end
         util.draw_correct(resource.render_child(child), 0, 0, WIDTH, HEIGHT)	    

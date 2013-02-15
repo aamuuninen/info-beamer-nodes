@@ -49,6 +49,10 @@ util.file_watch("forecast", function(content)
     end
 end)
 
+util.file_watch("weather_background.jpg", function(content)
+    background = resource.load_image("weather_background.jpg")
+end)
+
 background = resource.load_image("weather_background.jpg")
 
 local PI = 3.14159

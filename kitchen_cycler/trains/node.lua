@@ -40,8 +40,6 @@ util.file_watch("connections", function(content)
 end)
 
 function node.render()
-    --font:write(60,200, doc.root.attr['id'], 80,1,0,0,1)
---    font:write(60, 300, tostring(kid2(doc.root.el, "connections").el[3].attr["duration"]), 50, 1,0,0,1)
     local i = 1
     local connections = doc:kid("request"):kid("connections").el
     local mitfussweg = function(connection)
@@ -82,37 +80,45 @@ function node.render()
             return abfahrtvonpart(connection:kid("connection_parts"):kid("part", 1))
         end
     end
+    local abfahrtsfahrzeug = function(connection)
+        if mitfussweg(connection) then
+            return connection:kid("connection_parts"):kid("part", 2):kid("line").kids[1].value
+        else
+            return connection:kid("connection_parts"):kid("part", 1):kid("line").kids[1].value
+        end
+    end
     local zeitohnesekunden = function(zeit)
         local secondcolon = string.find(zeit, ":", string.find(zeit, ":", 1, true)+1, true)
         return string.sub(zeit, 1, secondcolon-1)
     end
     local abfahrtszeit = function(connection)
-        if mitfussweg(connections[i]) then
+        if mitfussweg(connection) then
             -- so da brauchen wa ne andre zeit, wa
             return abfahrtsstation(connections[i]:kid("connection_parts"):kid("part", 2)):kid("dateandtime"):kid("time").kids[1].value
         else
-            return connections[i]:kid("dateandtime"):kid("time").kids[1].value
+            return connection:kid("dateandtime"):kid("time").kids[1].value
         end
     end
     local lineheight = 55
-    local x1 = 60  -- spalte 1
-    local x2 = 230  -- spalte 2
-    local x3 = 360 -- spalte 3
-    local x4 = 550
+    local x1 = 50  -- spalte 1
+    local x2 = 250  -- spalte 2
+    local x3 = 430 -- spalte 3
+    local x4 = 560
     local ytitle = 70
     local ytable = 200
     local fontsize = 40
-    font:write(60, ytitle, "OEPNV Monitor", 70,1,0,0,1)
-    font:write(x1, ytable, "Dauer", fontsize, 0, 1, 0, 1)
-    font:write(x2, ytable, "Ums.", fontsize, 0, 1, 0,1)
-    font:write(x3, ytable, "Uhrzeit", fontsize, 0, 1, 0, 1)
+    font:write(10, ytitle, "OEPNV Monitor", 70,1,0,0,1)
+    font:write(x1, ytable, "Uhrzeit", fontsize, 0, 1, 0, 1)
+    font:write(x2, ytable, "Dauer", fontsize, 0, 1, 0,1)
+    font:write(x3, ytable, "Ums.", fontsize, 0, 1, 0, 1)
     font:write(x4, ytable, "Haltestelle", fontsize ,0, 1, 0, 1)
-    while i <= #connections  do
-        local y = (i) * lineheight
-        font:write(x1, ytable + y, connections[i].attr["duration"], fontsize, 0, 1, 0, 1)
-        font:write(x2, ytable + y, connections[i].attr["changes"], fontsize, 0, 1, 0, 1)
-        font:write(x3, ytable + y, zeitohnesekunden(abfahrtszeit(connections[i])), fontsize, 0, 1, 0, 1)
+    while i <= math.min(4, #connections)  do
+        local y = (i) * 2*  lineheight
+        font:write(x2, ytable + y, connections[i].attr["duration"], fontsize, 0, 1, 0, 1)
+        font:write(x3, ytable + y, connections[i].attr["changes"], fontsize, 0, 1, 0, 1)
+        font:write(x1, ytable + y, zeitohnesekunden(abfahrtszeit(connections[i])), fontsize, 0, 1, 0, 1)
         font:write(x4, ytable + y, abfahrtsbahnhof(connections[i]), fontsize, 0, 1, 0, 1)
+        font:write(x4, ytable + y + lineheight, abfahrtsfahrzeug(connections[i]), fontsize, 0, 1, 0, 1)
         i = i + 1
     end
     --font:write(60, 300, #doc:kid("request"):kid("connections").el, 50, 1,0,0,1)

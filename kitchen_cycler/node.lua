@@ -35,15 +35,6 @@ function make_switcher(childs, interval)
         last_child = child
         child = childs.next()
 
-        -- if the child is to be ignored, then ignore
-        for _,v in pairs(skip_nodes) do
-           if v == child then
-            -- do something
-            child = childs.next()
-            break
-          end
-        end
-
        -- prevent double displaying of childs, fix a bug
        while last_child == child do
           child = childs.next()
@@ -73,7 +64,18 @@ end
 local switcher = make_switcher(util.generator(function()
     local cycle = {}
     for child, updated in pairs(CHILDS) do
-        table.insert(cycle, child)
+    local found = false
+	-- if the child is to be ignored, then ignore
+        for _,v in pairs(skip_nodes) do
+           if v == child then
+            -- do something
+            found = ture
+            break
+          end
+        end
+        if found == false then
+            table.insert(cycle, child)
+        end
     end
     return cycle
 end), interval)

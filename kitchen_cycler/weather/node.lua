@@ -122,11 +122,11 @@ function node.render()
     lasthour_rain = current.rain["1h"]
     url = current.url
 
-    font:fbwrite(100, 100, "Wetter", 100, 1,1,1,1)
-    font:fbwrite(100,250, "Temperatur: " .. round(current_temp,2) .. " °C",50,1,1,1,1) 
-    font:fbwrite(100,350, "Luftfeuchte: " .. round(current_humid,2) .. " %",50,1,1,1,1) 
-    font:fbwrite(100,450, "Luftdruck: " .. round(current_pressure,2) .. " hPa",50,1,1,1,1) 
-    font:fbwrite(100,550, "Niederschlag: " .. round(lasthour_rain,2) .. " mm/h",50,1,1,1,1) 
-    font:fbwrite(100,680, "Wetterdaten via " .. url ,20,1,1,1,1) 
-    font:fbwrite(100,720, "Aktualisiert um " .. current_date ,20,1,1,1,1)
+    font:fbwrite(100, 100, "Wetter", 100, 1,0,0,1)
+    font:fbwrite(100,250, "Temperatur: " .. round(current_temp,2) .. " °C",50,0,1,0,1) 
+    font:fbwrite(100,350, "Luftfeuchte: " .. round(current_humid,2) .. " %",50,0,1,0,1) 
+    font:fbwrite(100,450, "Luftdruck: " .. round(current_pressure,2) .. " hPa",50,0,1,0,1) 
+    font:fbwrite(100,550, "Niederschlag: " .. round(lasthour_rain,2) .. " mm/h",50,0,1,0,1) 
+    font:fbwrite(100,680, "Wetterdaten via " .. url ,20,0,1,0,1) 
+    font:fbwrite(100,720, "Aktualisiert um " .. current_date ,20,0,1,0,1)
 end

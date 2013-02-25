@@ -11,7 +11,7 @@ special_nodes['pricelist'] = 3
 special_nodes['photos'] = 20
 special_nodes['weather'] = 5
 special_nodes['main_text'] = 2
-
+special_nodes['analogclock'] = 3
 -- set nodes which shoud be skiped (e.g. {'weather','clock',...})
 local skip_nodes = {'barcodebeamer'}
 

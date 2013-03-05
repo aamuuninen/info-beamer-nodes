@@ -49,7 +49,7 @@ function node.render()
         if not next_image then
             next_image = resource.load_image(pictures.next())
         end
-        --[[ local xoff = (1 - time_to_next) * WIDTH
+        local xoff = (1 - time_to_next) * WIDTH
 
         gl.pushMatrix()
             if out_effect < 1 then
@@ -86,7 +86,7 @@ function node.render()
                 )
             end
         gl.popMatrix()
-    --]]
+    
         util.draw_correct(current_image, 0,0,WIDTH,HEIGHT)
     else
         util.draw_correct(current_image, 0,0,WIDTH,HEIGHT)

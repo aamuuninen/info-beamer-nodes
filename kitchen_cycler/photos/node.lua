@@ -27,11 +27,11 @@ function node.render()
        -- WIDTH/2, HEIGHT/2, -WIDTH/1.4,
        WIDTH/2, HEIGHT/2, 0
     )
-    -- gl.perspective(60,
-    --    WIDTH/2+math.cos(sys.now()) * 100, HEIGHT/2+math.sin(sys.now()) * 100, -WIDTH/1.9,
-    --    -- WIDTH/2, HEIGHT/2, -WIDTH/1.4,
-    --    WIDTH/2, HEIGHT/2, 0
-    -- )
+   -- gl.perspective(60,
+    --   WIDTH/2+math.cos(sys.now()) * 100, HEIGHT/2+math.sin(sys.now()) * 100, -WIDTH/1.9,
+     --   -- WIDTH/2, HEIGHT/2, -WIDTH/1.4,
+     --   WIDTH/2, HEIGHT/2, 0
+    --)
     local time_to_next = next_image_time - sys.now()
     if time_to_next < 0 then
         if next_image then
@@ -87,7 +87,7 @@ function node.render()
             end
         gl.popMatrix()
     
-        util.draw_correct(current_image, 0,0,WIDTH,HEIGHT)
+        --util.draw_correct(current_image, 0,0,WIDTH,HEIGHT)
     else
         util.draw_correct(current_image, 0,0,WIDTH,HEIGHT)
     end
